@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: rosys-german-cv-builder
+    env: node
+    plan: free
+    buildCommand: "cd frontend && npm install && npm run build && cd ../backend && npm install"
+    startCommand: "cd backend && node server.js"
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: HOST_PIN
+        value: rosys1971
