@@ -174,9 +174,6 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
                   className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none"
                 />
               </div>
-              <p className="text-[11px] text-slate-400 mt-1.5">
-                Default Host PIN: <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-bold">rosys1971</code>
-              </p>
             </div>
 
             {loginError && (
