@@ -157,11 +157,11 @@ function createDocxFromResume(data) {
             rows: [
               createDataRow('Nachname, Vorname:', `${p.lastName || ''}, ${p.firstName || ''}`),
               createDataRow('Geburtstag/-ort:', `${p.dateOfBirth || ''}${p.placeOfBirth ? ', ' + p.placeOfBirth : ''}`),
-              createDataRow('Herkunftsland:', p.countryOfOrigin || 'Indien'),
-              createDataRow('Ausbildung:', p.qualification || 'Bachelor of Science (Nursing)'),
-              createDataRow('Berufserfahrung in Jahren:', p.yearsOfExperience || '1 Jahre 6 Monate'),
-              createDataRow('Sprachkenntnisse:', p.languageProficiency || 'Deutsch B2', true),
-              createDataRow('Arbeitsbeginn:', p.startDate || 'März 2027')
+              createDataRow('Herkunftsland:', p.countryOfOrigin || ''),
+              createDataRow('Ausbildung:', p.qualification || ''),
+              createDataRow('Berufserfahrung in Jahren:', p.yearsOfExperience || ''),
+              createDataRow('Sprachkenntnisse:', p.languageProficiency || '', true),
+              createDataRow('Arbeitsbeginn:', p.startDate || '')
             ]
           }),
 

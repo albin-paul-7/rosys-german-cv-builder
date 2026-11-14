@@ -1,3 +1,46 @@
+export const emptyCvData = {
+  id: "student-cv-new",
+  name: "Neuer Lebenslauf",
+  updatedAt: new Date().toISOString(),
+  template: "rosys-official",
+  themeColor: "#18181b",
+  fontFamily: "Inter, sans-serif",
+  institution: {
+    name: "Rosy's German School",
+    subTitle: "German Linguist Since 1971 • Euronav Overseas & Educational Consultants",
+    address: "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi, Kerala, India – 682024",
+    phone: "+91 8921438879",
+    email: "rosysgermanschool@gmail.com",
+    website: "www.rosysgermanschool.com",
+    logo: "/rosys-logo.png",
+    partnerInfo: "Anerkanntes NORKA-SCA Partnerzentrum für Pflegefachkräfte in Deutschland"
+  },
+  personalData: {
+    lastName: "",
+    firstName: "",
+    dateOfBirth: "",
+    placeOfBirth: "",
+    countryOfOrigin: "Indien",
+    qualification: "",
+    yearsOfExperience: "",
+    languageProficiency: "",
+    startDate: "",
+    photoUrl: ""
+  },
+  assessment: {
+    title: "Einschätzung Rosy's German School",
+    paragraphs: []
+  },
+  experience: [],
+  education: [],
+  skills: {
+    languages: [],
+    socialSkills: [],
+    itSkills: [],
+    equipment: []
+  }
+};
+
 export const initialRosysCvData = {
   id: "sample-gopika-jayaram",
   name: "Gopika Jayaram - Kardiologie",
@@ -106,7 +149,7 @@ export const alternativeProfiles = {
     name: "Rahul Nair - Intensivstation (ITS)",
     updatedAt: new Date().toISOString(),
     template: "rosys-modern",
-    themeColor: "#0284c7",
+    themeColor: "#dc2626",
     fontFamily: "Inter, sans-serif",
     institution: { ...initialRosysCvData.institution },
     personalData: {
@@ -117,7 +160,7 @@ export const alternativeProfiles = {
       countryOfOrigin: "Indien",
       qualification: "Bachelor of Science (Nursing) + Intensivkurs",
       yearsOfExperience: "3 Jahre 2 Monate",
-      languageProficiency: "Deutsch B2 (TELC Medizin)",
+      languageProficiency: "Deutsch B2 (TELC)",
       startDate: "Januar 2027",
       photoUrl: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80"
     },
@@ -125,7 +168,7 @@ export const alternativeProfiles = {
       title: "Einschätzung Rosy's German School",
       paragraphs: [
         "Herr Rahul Nair verfügt über mehr als drei Jahre fundierte Berufserfahrung als Intensivpfleger am Aster Medcity Hospital in Kochi.",
-        "In seiner klinischen Praxis betreute Herr Nair beatmete und hämodynamisch instabile Patientinnen und Patienten auf der interdisziplinären Intensivstation. Er beherrscht die Verabreichung von Notfallmedikamenten, das erweiterte Monitoring (Arterielle Druckmessung, ZVD) sowie den sicheren Umgang mit Notfallequipment wie Defibrillatoren und Perfusoren.",
+        "In seiner klinischen Praxis betreute Herr Nair beatmete und hämodynamisch instabile Patientinnen und Patienten auf der interdisziplinären Intensivstation. Er beherrscht die Verabreichung von Notfallmedikamenten, das erweiterte Monitoring sowie den sicheren Umgang mit Notfallequipment wie Defibrillatoren und Perfusoren.",
         "Zu seinen herausragenden persönlichen Eigenschaften gehören emotionale Belastbarkeit, rasche Auffassungsgabe und teamorientierte Kommunikation. Sprachlich hat Herr Nair das B2-Niveau in Deutsch mit exzellenten Ergebnissen an der Rosy's German School abgeschlossen.",
         "Rosy's German School empfiehlt Herrn Nair uneingeschränkt für den Einsatz auf Intensivstationen und Intermediate-Care-Einheiten deutscher Schwerpunktkliniken."
       ]

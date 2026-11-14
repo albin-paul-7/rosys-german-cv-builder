@@ -340,23 +340,23 @@ function generateHtmlFromResume(data) {
             </tr>
             <tr>
               <td class="label-col">Herkunftsland</td>
-              <td class="value-col">${p.countryOfOrigin || 'Indien'}</td>
+              <td class="value-col">${p.countryOfOrigin || ''}</td>
             </tr>
             <tr>
               <td class="label-col">Ausbildung</td>
-              <td class="value-col">${p.qualification || 'Bachelor of Science (Nursing)'}</td>
+              <td class="value-col">${p.qualification || ''}</td>
             </tr>
             <tr>
               <td class="label-col">Berufserfahrung in Jahren</td>
-              <td class="value-col">${p.yearsOfExperience || '1 Jahre 6 Monate'}</td>
+              <td class="value-col">${p.yearsOfExperience || ''}</td>
             </tr>
             <tr>
               <td class="label-col">Sprachkenntnisse</td>
-              <td class="value-col" style="font-weight: 700; color: #dc2626;">${p.languageProficiency || 'Deutsch B2'}</td>
+              <td class="value-col" style="font-weight: 700; color: #dc2626;">${p.languageProficiency || ''}</td>
             </tr>
             <tr>
               <td class="label-col">Arbeitsbeginn</td>
-              <td class="value-col">${p.startDate || 'März 2027'}</td>
+              <td class="value-col">${p.startDate || ''}</td>
             </tr>
           </table>
 

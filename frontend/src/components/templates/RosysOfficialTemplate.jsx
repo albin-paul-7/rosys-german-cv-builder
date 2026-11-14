@@ -97,23 +97,23 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Herkunftsland</td>
-                      <td className="py-1 text-slate-700">{p.countryOfOrigin || 'Indien'}</td>
+                      <td className="py-1 text-slate-700">{p.countryOfOrigin || ''}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Ausbildung</td>
-                      <td className="py-1 text-slate-700">{p.qualification || 'Bachelor of Science (Nursing)'}</td>
+                      <td className="py-1 text-slate-700">{p.qualification || ''}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Berufserfahrung in Jahren</td>
-                      <td className="py-1 text-slate-700">{p.yearsOfExperience || '1 Jahre 6 Monate'}</td>
+                      <td className="py-1 text-slate-700">{p.yearsOfExperience || ''}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Sprachkenntnisse</td>
-                      <td className="py-1 font-bold text-rose-700">{p.languageProficiency || 'Deutsch B2'}</td>
+                      <td className="py-1 font-bold text-rose-700">{p.languageProficiency || ''}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Arbeitsbeginn</td>
-                      <td className="py-1 text-slate-700">{p.startDate || 'März 2027'}</td>
+                      <td className="py-1 text-slate-700">{p.startDate || ''}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -141,42 +141,54 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                   {assessment.title || "Einschätzung Rosy's German School"}
                 </div>
                 <div className="flex-1 text-slate-700 text-justify space-y-2">
-                  {(assessment.paragraphs || []).map((para, idx) => (
-                    <p key={idx} className="m-0">{para}</p>
-                  ))}
+                  {(assessment.paragraphs || []).length > 0 ? (
+                    assessment.paragraphs.map((para, idx) => (
+                      <p key={idx} className="m-0">{para}</p>
+                    ))
+                  ) : (
+                    <p className="text-slate-400 italic text-xs m-0">
+                      [Noch keine Einschätzung hinterlegt – Nutzen Sie die Vorlagen im Editor]
+                    </p>
+                  )}
                 </div>
               </div>
 
               {/* Section: Berufliche Erfahrung (Part 1) */}
               {renderSectionHeader('Berufliche Erfahrung')}
 
-              {experience.slice(0, 1).map((exp, idx) => (
-                <div key={idx} className="flex items-start text-[13px] mb-2">
-                  <div className="w-[190px] font-bold text-slate-900 flex-shrink-0">
-                    {exp.period}
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-bold text-rose-700 text-[13.5px]">
-                      {exp.role}
+              {experience.length > 0 ? (
+                experience.slice(0, 1).map((exp, idx) => (
+                  <div key={idx} className="flex items-start text-[13px] mb-2">
+                    <div className="w-[190px] font-bold text-slate-900 flex-shrink-0">
+                      {exp.period}
                     </div>
-                    <div className="text-slate-600 mb-1">
-                      {exp.facility}
-                    </div>
-                    {exp.tasks && exp.tasks.length > 0 && (
-                      <div>
-                        <div className="font-semibold text-slate-800 text-[12.5px] mt-1 mb-0.5">
-                          Aufgaben:
-                        </div>
-                        <ul className="list-disc pl-5 m-0 space-y-0.5 text-slate-700 text-[12.5px]">
-                          {exp.tasks.slice(0, 2).map((task, tIdx) => (
-                            <li key={tIdx}>{task}</li>
-                          ))}
-                        </ul>
+                    <div className="flex-1">
+                      <div className="font-bold text-rose-700 text-[13.5px]">
+                        {exp.role}
                       </div>
-                    )}
+                      <div className="text-slate-600 mb-1">
+                        {exp.facility}
+                      </div>
+                      {exp.tasks && exp.tasks.length > 0 && (
+                        <div>
+                          <div className="font-semibold text-slate-800 text-[12.5px] mt-1 mb-0.5">
+                            Aufgaben:
+                          </div>
+                          <ul className="list-disc pl-5 m-0 space-y-0.5 text-slate-700 text-[12.5px]">
+                            {exp.tasks.slice(0, 2).map((task, tIdx) => (
+                              <li key={tIdx}>{task}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="text-slate-400 italic text-xs py-1">
+                  [Noch keine Berufserfahrung eingetragen – Bitte im Editor erfassen]
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -232,17 +244,23 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
               {renderSectionHeader('Ausbildung')}
 
               <div className="space-y-2.5 mb-5">
-                {education.map((edu, idx) => (
-                  <div key={idx} className="flex items-start text-[13px]">
-                    <div className="w-[190px] font-bold text-slate-900 flex-shrink-0">
-                      {edu.period}
+                {education.length > 0 ? (
+                  education.map((edu, idx) => (
+                    <div key={idx} className="flex items-start text-[13px]">
+                      <div className="w-[190px] font-bold text-slate-900 flex-shrink-0">
+                        {edu.period}
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-bold text-slate-900">{edu.degree}</div>
+                        <div className="text-slate-600">{edu.institution}</div>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-slate-900">{edu.degree}</div>
-                      <div className="text-slate-600">{edu.institution}</div>
-                    </div>
+                  ))
+                ) : (
+                  <div className="text-slate-400 italic text-xs py-1">
+                    [Noch keine Ausbildung eingetragen – Bitte im Editor erfassen]
                   </div>
-                ))}
+                )}
               </div>
 
               {/* Section: Kenntnisse und Kompetenzen */}
@@ -255,11 +273,15 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     Sprachkenntnisse
                   </div>
                   <div className="flex-1 space-y-0.5 text-slate-800">
-                    {(skills.languages || []).map((lang, idx) => (
-                      <div key={idx}>
-                        <span className="font-semibold">{lang.language}</span> – {lang.level}
-                      </div>
-                    ))}
+                    {(skills.languages || []).length > 0 ? (
+                      skills.languages.map((lang, idx) => (
+                        <div key={idx}>
+                          <span className="font-semibold">{lang.language}</span> – {lang.level}
+                        </div>
+                      ))
+                    ) : (
+                      <span className="text-slate-400 italic text-xs">[Noch keine Sprachen eingetragen]</span>
+                    )}
                   </div>
                 </div>
 
@@ -269,9 +291,13 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     Soziale Kompetenzen
                   </div>
                   <div className="flex-1 space-y-0.5 text-slate-800">
-                    {(skills.socialSkills || []).map((skill, idx) => (
-                      <div key={idx}>{skill}</div>
-                    ))}
+                    {(skills.socialSkills || []).length > 0 ? (
+                      skills.socialSkills.map((skill, idx) => (
+                        <div key={idx}>{skill}</div>
+                      ))
+                    ) : (
+                      <span className="text-slate-400 italic text-xs">[Noch keine sozialen Kompetenzen hinterlegt]</span>
+                    )}
                   </div>
                 </div>
 
@@ -281,9 +307,13 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     EDV / IT-Kenntnisse
                   </div>
                   <div className="flex-1 space-y-0.5 text-slate-800">
-                    {(skills.itSkills || []).map((it, idx) => (
-                      <div key={idx}>{it}</div>
-                    ))}
+                    {(skills.itSkills || []).length > 0 ? (
+                      skills.itSkills.map((it, idx) => (
+                        <div key={idx}>{it}</div>
+                      ))
+                    ) : (
+                      <span className="text-slate-400 italic text-xs">[Noch keine IT-Kenntnisse hinterlegt]</span>
+                    )}
                   </div>
                 </div>
 
@@ -293,12 +323,16 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     Am Arbeitsplatz verwendete<br />Geräte
                   </div>
                   <div className="flex-1 space-y-0.5 text-slate-800">
-                    {(skills.equipment || []).map((eq, idx) => (
-                      <div key={idx} className="flex items-center gap-1.5">
-                        <span className="text-rose-600 font-bold text-xs">✓</span>
-                        <span>{eq}</span>
-                      </div>
-                    ))}
+                    {(skills.equipment || []).length > 0 ? (
+                      skills.equipment.map((eq, idx) => (
+                        <div key={idx} className="flex items-center gap-1.5">
+                          <span className="text-rose-600 font-bold text-xs">✓</span>
+                          <span>{eq}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <span className="text-slate-400 italic text-xs">[Noch keine Geräte ausgewählt]</span>
+                    )}
                   </div>
                 </div>
               </div>

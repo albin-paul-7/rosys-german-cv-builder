@@ -171,11 +171,11 @@ function generateClientDocx(data) {
             rows: [
               createRow('Nachname, Vorname:', `${p.lastName || ''}, ${p.firstName || ''}`),
               createRow('Geburtstag/-ort:', `${p.dateOfBirth || ''}${p.placeOfBirth ? ', ' + p.placeOfBirth : ''}`),
-              createRow('Herkunftsland:', p.countryOfOrigin || 'Indien'),
-              createRow('Ausbildung:', p.qualification || 'Bachelor of Science (Nursing)'),
-              createRow('Berufserfahrung in Jahren:', p.yearsOfExperience || '1 Jahre 6 Monate'),
-              createRow('Sprachkenntnisse:', p.languageProficiency || 'Deutsch B2', true),
-              createRow('Arbeitsbeginn:', p.startDate || 'März 2027')
+              createRow('Herkunftsland:', p.countryOfOrigin || ''),
+              createRow('Ausbildung:', p.qualification || ''),
+              createRow('Berufserfahrung in Jahren:', p.yearsOfExperience || ''),
+              createRow('Sprachkenntnisse:', p.languageProficiency || '', true),
+              createRow('Arbeitsbeginn:', p.startDate || '')
             ]
           }),
 

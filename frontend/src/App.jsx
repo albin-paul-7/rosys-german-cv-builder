@@ -1,35 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import TemplateGallery from './components/TemplateGallery';
 import ResumeEditor from './components/ResumeEditor';
 import LivePreview from './components/LivePreview';
 import HostDashboard from './components/HostDashboard';
 
-import { initialRosysCvData, alternativeProfiles } from './data/sampleCvData';
-import { fetchDefaultSample, saveResume } from './utils/api';
+import { emptyCvData, initialRosysCvData, alternativeProfiles } from './data/sampleCvData';
+import { saveResume } from './utils/api';
 import { Eye, Edit3, CheckCircle } from 'lucide-react';
 
 export default function App() {
-  const [resumeData, setResumeData] = useState(initialRosysCvData);
+  // Starts with clean, completely blank CV so students fill in their own information
+  const [resumeData, setResumeData] = useState(emptyCvData);
   const [currentView, setCurrentView] = useState('editor'); // 'editor' | 'templates' | 'host'
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState(null);
   const [mobileTab, setMobileTab] = useState('form'); // 'form' | 'preview'
-
-  // Attempt to fetch from backend on mount
-  useEffect(() => {
-    async function loadInitial() {
-      try {
-        const remoteSample = await fetchDefaultSample();
-        if (remoteSample) {
-          setResumeData(remoteSample);
-        }
-      } catch (err) {
-        console.log('Using local initial data', err);
-      }
-    }
-    loadInitial();
-  }, []);
 
   const showNotification = (msg, type = 'success') => {
     setNotification({ msg, type });
@@ -37,6 +23,10 @@ export default function App() {
   };
 
   const handleSave = async () => {
+    if (!resumeData.personalData?.lastName && !resumeData.personalData?.firstName) {
+      showNotification('Please enter at least your First and Last Name before saving', 'info');
+      return;
+    }
     setIsSaving(true);
     try {
       const res = await saveResume(resumeData);
@@ -64,38 +54,10 @@ export default function App() {
 
   const handleReset = () => {
     setResumeData({
-      ...initialRosysCvData,
-      id: `student-cv-${Date.now()}`,
-      personalData: {
-        lastName: '',
-        firstName: '',
-        dateOfBirth: '',
-        placeOfBirth: '',
-        countryOfOrigin: 'Indien',
-        qualification: 'Bachelor of Science (Nursing)',
-        yearsOfExperience: '',
-        languageProficiency: 'Deutsch B2',
-        startDate: 'Sofort verfügbar',
-        photoUrl: ''
-      },
-      assessment: {
-        title: "Einschätzung Rosy's German School",
-        paragraphs: [
-          "Bewerberin verfügt über praktische Berufserfahrung im klinischen Pflegebereich...",
-          "Zu ihren Kompetenzen gehören Verantwortungsbewusstsein, Teamfähigkeit und fundierte Deutschkenntnisse."
-        ]
-      },
-      experience: [
-        {
-          id: 'exp-new-1',
-          period: '01/2024 – Heute',
-          role: 'Pflegefachkraft',
-          facility: 'im Hospital / Klinikum',
-          tasks: ['Ganzheitliche pflegerische Betreuung von Patientinnen und Patienten']
-        }
-      ]
+      ...emptyCvData,
+      id: `student-cv-${Date.now()}`
     });
-    showNotification('Form reset to blank candidate template', 'info');
+    showNotification('Form cleared to fresh blank candidate template', 'info');
   };
 
   const handleSelectTemplate = (templateId) => {
