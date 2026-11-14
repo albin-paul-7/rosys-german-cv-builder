@@ -6,7 +6,8 @@ import {
   Printer, 
   Maximize2, 
   Layers, 
-  FileCheck2,
+  FileText,
+  FileSpreadsheet,
   Loader2 
 } from 'lucide-react';
 
@@ -16,11 +17,13 @@ import RosysExecutiveTemplate from './templates/RosysExecutiveTemplate';
 import RosysMinimalTemplate from './templates/RosysMinimalTemplate';
 import { TEMPLATES } from '../data/templatesConfig';
 import { downloadCvPdf, triggerPrint } from '../utils/pdfExport';
+import { downloadCvDocx } from '../utils/docxExport';
 
 export default function LivePreview({ resumeData, onUpdateTemplate }) {
   const [zoom, setZoom] = useState(0.85);
   const [activePage, setActivePage] = useState('all'); // 'all', 1, 2
-  const [isExporting, setIsExporting] = useState(false);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+  const [isExportingDocx, setIsExportingDocx] = useState(false);
   const [exportMessage, setExportMessage] = useState('');
 
   const currentTemplateId = resumeData.template || 'rosys-official';
@@ -29,20 +32,36 @@ export default function LivePreview({ resumeData, onUpdateTemplate }) {
     setZoom((prev) => Math.min(Math.max(0.4, Number((prev + delta).toFixed(2))), 1.5));
   };
 
-  const handleDownload = async () => {
-    setIsExporting(true);
+  const handleDownloadPdf = async () => {
+    setIsExportingPdf(true);
     setExportMessage('Generating German Lebenslauf PDF...');
     try {
       await downloadCvPdf(resumeData);
-      setExportMessage('Download started!');
+      setExportMessage('PDF downloaded successfully!');
       setTimeout(() => setExportMessage(''), 2500);
     } catch (err) {
       console.error(err);
-      setExportMessage('Exporting via browser print...');
+      setExportMessage('Exporting via browser print engine...');
       triggerPrint();
       setTimeout(() => setExportMessage(''), 2500);
     } finally {
-      setIsExporting(false);
+      setIsExportingPdf(false);
+    }
+  };
+
+  const handleDownloadDocx = async () => {
+    setIsExportingDocx(true);
+    setExportMessage('Generating Microsoft Word (.docx)...');
+    try {
+      await downloadCvDocx(resumeData);
+      setExportMessage('Word (.docx) downloaded successfully!');
+      setTimeout(() => setExportMessage(''), 2500);
+    } catch (err) {
+      console.error(err);
+      setExportMessage('DOCX generation failed');
+      setTimeout(() => setExportMessage(''), 2500);
+    } finally {
+      setIsExportingDocx(false);
     }
   };
 
@@ -158,32 +177,47 @@ export default function LivePreview({ resumeData, onUpdateTemplate }) {
           <button
             type="button"
             onClick={triggerPrint}
-            className="hidden sm:flex items-center gap-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-md shadow-xs transition"
+            className="hidden sm:flex items-center gap-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-2.5 py-1.5 rounded-md shadow-xs transition"
           >
             <Printer className="w-3.5 h-3.5" />
             Print
           </button>
 
+          {/* Download Word (.docx) button */}
+          <button
+            type="button"
+            onClick={handleDownloadDocx}
+            disabled={isExportingDocx}
+            className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-xs transition"
+          >
+            {isExportingDocx ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <FileSpreadsheet className="w-3.5 h-3.5" />
+            )}
+            <span>Word (.docx)</span>
+          </button>
+
           {/* Download PDF button */}
           <button
             type="button"
-            onClick={handleDownload}
-            disabled={isExporting}
-            className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-xs font-bold px-3.5 py-1.5 rounded-md shadow-sm transition"
+            onClick={handleDownloadPdf}
+            disabled={isExportingPdf}
+            className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-xs transition"
           >
-            {isExporting ? (
+            {isExportingPdf ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
             ) : (
               <Download className="w-3.5 h-3.5" />
             )}
-            <span>Download PDF</span>
+            <span>PDF</span>
           </button>
         </div>
       </div>
 
       {/* Export status toast if any */}
       {exportMessage && (
-        <div className="bg-blue-600 text-white text-xs py-1.5 px-4 text-center font-medium animate-pulse">
+        <div className="bg-slate-900 text-white text-xs py-1.5 px-4 text-center font-medium animate-pulse">
           {exportMessage}
         </div>
       )}

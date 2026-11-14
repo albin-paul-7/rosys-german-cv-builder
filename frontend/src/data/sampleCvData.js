@@ -3,11 +3,11 @@ export const initialRosysCvData = {
   name: "Gopika Jayaram - Kardiologie",
   updatedAt: new Date().toISOString(),
   template: "rosys-official",
-  themeColor: "#14477c",
+  themeColor: "#18181b",
   fontFamily: "Inter, sans-serif",
   institution: {
     name: "Rosy's German School",
-    subTitle: "Euronav Overseas & Educational Consultants Pvt. Ltd.",
+    subTitle: "German Linguist Since 1971 • Euronav Overseas & Educational Consultants",
     address: "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi, Kerala, India – 682024",
     phone: "+91 8921438879",
     email: "rosysgermanschool@gmail.com",

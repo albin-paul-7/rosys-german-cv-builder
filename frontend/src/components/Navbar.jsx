@@ -6,8 +6,13 @@ import {
   Save, 
   RotateCcw, 
   Sparkles,
-  ChevronDown
+  ChevronDown,
+  ShieldAlert,
+  FileSpreadsheet,
+  Users
 } from 'lucide-react';
+import { downloadCvPdf } from '../utils/pdfExport';
+import { downloadCvDocx } from '../utils/docxExport';
 
 export default function Navbar({ 
   currentView, 
@@ -15,7 +20,8 @@ export default function Navbar({
   onLoadSample, 
   onSave, 
   isSaving,
-  onReset 
+  onReset,
+  resumeData
 }) {
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
@@ -26,20 +32,20 @@ export default function Navbar({
             <img 
               src="/rosys-logo.png" 
               alt="Rosy's German School" 
-              className="h-10 w-auto object-contain"
+              className="h-11 w-auto object-contain"
               onError={(e) => { e.target.style.display = 'none'; }}
             />
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base text-slate-900 tracking-tight">
+                <span className="font-black text-base text-slate-900 tracking-tight">
                   Rosy's CV Studio
                 </span>
-                <span className="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  German Healthcare
+                <span className="text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Since 1971
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium">
-                Official Lebenslauf Builder for German Hospital Placement
+              <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
+                German Healthcare Lebenslauf Builder & Host Portal
               </p>
             </div>
           </div>
@@ -49,9 +55,9 @@ export default function Navbar({
             <button
               type="button"
               onClick={() => setCurrentView('templates')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold transition ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition ${
                 currentView === 'templates'
-                  ? 'bg-white text-blue-700 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -61,27 +67,40 @@ export default function Navbar({
             <button
               type="button"
               onClick={() => setCurrentView('editor')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold transition ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition ${
                 currentView === 'editor'
-                  ? 'bg-white text-blue-700 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
               Editor & Preview
             </button>
+            {/* Host Dashboard Link */}
+            <button
+              type="button"
+              onClick={() => setCurrentView('host')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition ${
+                currentView === 'host'
+                  ? 'bg-amber-500 text-white shadow-xs'
+                  : 'text-amber-800 hover:bg-amber-100/60'
+              }`}
+            >
+              <Users className="w-3.5 h-3.5" />
+              Host Portal
+            </button>
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            {/* Quick Sample Loader */}
+            {/* Pre-fill Sample Loader */}
             <div className="relative group">
               <button
                 type="button"
-                className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold px-3 py-1.5 rounded-md transition"
+                className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold px-2.5 py-1.5 rounded-md transition"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span className="hidden sm:inline">Pre-fill Sample</span>
+                <span className="hidden md:inline">Sample CV</span>
                 <ChevronDown className="w-3 h-3 text-slate-400" />
               </button>
 
@@ -112,15 +131,16 @@ export default function Navbar({
               </div>
             </div>
 
-            {/* Save to Backend Button */}
+            {/* Save / Submit to School Button */}
             <button
               type="button"
               onClick={onSave}
               disabled={isSaving}
-              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-1.5 rounded-md shadow-xs transition"
+              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded-md shadow-xs transition"
+              title="Save CV into Rosy's database so the host can access and download it"
             >
               <Save className="w-3.5 h-3.5" />
-              <span>{isSaving ? 'Saving...' : 'Save CV'}</span>
+              <span>{isSaving ? 'Saving...' : 'Save & Submit'}</span>
             </button>
           </div>
         </div>

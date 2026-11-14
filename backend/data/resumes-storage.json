@@ -1,0 +1,341 @@
+[
+  {
+    "id": "sample-gopika-jayaram",
+    "name": "Gopika Jayaram - Kardiologie",
+    "updatedAt": "2026-11-13T14:30:00.000Z",
+    "template": "rosys-official",
+    "themeColor": "#18181b",
+    "fontFamily": "Inter, sans-serif",
+    "institution": {
+      "name": "Rosy's German School",
+      "subTitle": "German Linguist Since 1971 • Euronav Overseas & Educational Consultants",
+      "address": "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi, Kerala, India – 682024",
+      "phone": "+91 8921438879",
+      "email": "rosysgermanschool@gmail.com",
+      "website": "www.rosysgermanschool.com",
+      "logo": "/rosys-logo.png",
+      "partnerInfo": "Anerkanntes NORKA-SCA Partnerzentrum für Pflegefachkräfte in Deutschland"
+    },
+    "personalData": {
+      "lastName": "Jayaram",
+      "firstName": "Gopika",
+      "dateOfBirth": "31.08.2000",
+      "placeOfBirth": "Kerala, Indien",
+      "countryOfOrigin": "Indien",
+      "qualification": "Bachelor of Science (Nursing)",
+      "yearsOfExperience": "1 Jahre 6 Monate",
+      "languageProficiency": "Deutsch B2",
+      "startDate": "März 2027",
+      "photoUrl": "https://images.unsplash.com/photo-1594824813589-3221b65e90df?auto=format&fit=crop&w=400&q=80"
+    },
+    "assessment": {
+      "title": "Einschätzung Rosy's German School",
+      "paragraphs": [
+        "Frau Gopika Jayaram verfügt über rund eineinhalb Jahre Berufserfahrung als Pflegefachfrau im kardiologischen Bereich am Sree Gokulam Medical College.",
+        "In ihrer bisherigen Tätigkeit lag ihr Schwerpunkt auf der Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten, der pflegerischen Betreuung und Überwachung sowie der Verabreichung ärztlich verordneter Herzmedikamente. Darüber hinaus verfügt sie über praktische Erfahrung im Umgang mit für die kardiologische und akutmedizinische Versorgung relevanten Geräten, darunter EKG-Gerät, Herzmonitor, Pulsoxymeter, Defibrillator, Absauggerät sowie Spritzen- und Infusionspumpen. Auch im Umgang mit Notfallausrüstung wie Crash Cart und Ambu-Beutel sowie mit einem BiPAP-Gerät bringt sie praktische Erfahrung mit. Ihre fachliche Qualifikation wird durch einen Bachelor of Science in Nursing ergänzt.",
+        "Zu ihren persönlichen Kompetenzen zählen unter anderem Verantwortungsbewusstsein, Problemlösungskompetenz, aktives Zuhören, Beobachtungsgabe, Empathie und Teamfähigkeit. Sprachlich verfügt Frau Jayaram über Deutschkenntnisse auf B2-Niveau sowie Englischkenntnisse auf B2-Niveau.",
+        "Aus Sicht von Rosy's German School ist ihr Profil aufgrund ihrer bisherigen Tätigkeit insbesondere für den kardiologischen und akutmedizinischen Bereich interessant. Aufgrund ihrer noch vergleichsweise kurzen Berufserfahrung und der bislang fehlenden dokumentierten Berufserfahrung im deutschen Gesundheitswesen sollte für einen erfolgreichen Einstieg eine strukturierte Einarbeitung in die hiesigen pflegerischen Abläufe, Standards und Strukturen berücksichtigt werden."
+      ]
+    },
+    "experience": [
+      {
+        "id": "exp-1",
+        "period": "09/2024 – 03/2026",
+        "role": "Pflegefachfrau, Kardiologie",
+        "facility": "bei Sree Gokulam Medical College in Venjaramoodu",
+        "tasks": [
+          "Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten",
+          "Verabreichung ärztlich verordneter Herzmedikamente",
+          "Pflegerische Betreuung und Überwachung kardiologischer Patientinnen und Patienten",
+          "Vorbereitung und Assistenz bei diagnostischen und therapeutischen Maßnahmen",
+          "Dokumentation pflegerelevanter Daten im klinischen Informationssystem"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "period": "06/2020 – 09/2024",
+        "degree": "Bachelor of Science in Krankenpflege",
+        "institution": "an Sree Gokulam Medical College"
+      },
+      {
+        "id": "edu-2",
+        "period": "06/2018 – 03/2020",
+        "degree": "Oberschule",
+        "institution": "an S N Trust HSS"
+      },
+      {
+        "id": "edu-3",
+        "period": "06/2016 – 03/2017",
+        "degree": "Mittelschule",
+        "institution": "an Sree Narayana Public School"
+      }
+    ],
+    "skills": {
+      "languages": [
+        {
+          "language": "Deutsch",
+          "level": "B2"
+        },
+        {
+          "language": "Englisch",
+          "level": "B2"
+        },
+        {
+          "language": "Malayalam",
+          "level": "Muttersprache"
+        },
+        {
+          "language": "Tamil",
+          "level": "B1"
+        }
+      ],
+      "socialSkills": [
+        "Führungs- und Verantwortungsbewusstsein",
+        "Problemlösungskompetenz und aktives Zuhören",
+        "Ausgeprägte Beobachtungsgabe und Empathie",
+        "Teamfähigkeit und kooperative Zusammenarbeit"
+      ],
+      "itSkills": [
+        "Grundlegende Computerkenntnisse",
+        "Krankenhausinformationssysteme (KIS)",
+        "Digitale Pflegedokumentation"
+      ],
+      "equipment": [
+        "EKG-Gerät und Herzmonitor",
+        "Pulsoxymeter",
+        "Defibrillator und Notfallausrüstung (Crash Cart, Ambu-Beutel)",
+        "Absauggerät",
+        "Spritzen- und Infusionspumpe",
+        "BiPAP-Gerät"
+      ]
+    }
+  },
+  {
+    "id": "student-rahul-nair-2026",
+    "name": "Rahul Nair (ICU Nurse Specialist)",
+    "updatedAt": "2026-11-14T02:12:41.692Z",
+    "template": "rosys-official",
+    "themeColor": "#18181b",
+    "fontFamily": "Inter, sans-serif",
+    "institution": {
+      "name": "Rosy's German School",
+      "subTitle": "German Linguist Since 1971 • Euronav Overseas & Educational Consultants",
+      "address": "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi, Kerala, India – 682024",
+      "phone": "+91 8921438879",
+      "email": "rosysgermanschool@gmail.com",
+      "website": "www.rosysgermanschool.com",
+      "logo": "/rosys-logo.png",
+      "partnerInfo": "Anerkanntes NORKA-SCA Partnerzentrum für Pflegefachkräfte in Deutschland"
+    },
+    "personalData": {
+      "lastName": "Nair",
+      "firstName": "Rahul",
+      "dateOfBirth": "15.04.1998",
+      "placeOfBirth": "Kerala, Indien",
+      "countryOfOrigin": "Indien",
+      "qualification": "B.Sc Nursing + Intensivkurs",
+      "yearsOfExperience": "3 Jahre 2 Monate",
+      "languageProficiency": "Deutsch B2 (TELC)",
+      "startDate": "Januar 2027",
+      "photoUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80"
+    },
+    "assessment": {
+      "title": "Einschätzung Rosy's German School",
+      "paragraphs": [
+        "Frau Gopika Jayaram verfügt über rund eineinhalb Jahre Berufserfahrung als Pflegefachfrau im kardiologischen Bereich am Sree Gokulam Medical College.",
+        "In ihrer bisherigen Tätigkeit lag ihr Schwerpunkt auf der Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten, der pflegerischen Betreuung und Überwachung sowie der Verabreichung ärztlich verordneter Herzmedikamente. Darüber hinaus verfügt sie über praktische Erfahrung im Umgang mit für die kardiologische und akutmedizinische Versorgung relevanten Geräten, darunter EKG-Gerät, Herzmonitor, Pulsoxymeter, Defibrillator, Absauggerät sowie Spritzen- und Infusionspumpen. Auch im Umgang mit Notfallausrüstung wie Crash Cart und Ambu-Beutel sowie mit einem BiPAP-Gerät bringt sie praktische Erfahrung mit. Ihre fachliche Qualifikation wird durch einen Bachelor of Science in Nursing ergänzt.",
+        "Zu ihren persönlichen Kompetenzen zählen unter anderem Verantwortungsbewusstsein, Problemlösungskompetenz, aktives Zuhören, Beobachtungsgabe, Empathie und Teamfähigkeit. Sprachlich verfügt Frau Jayaram über Deutschkenntnisse auf B2-Niveau sowie Englischkenntnisse auf B2-Niveau.",
+        "Aus Sicht von Rosy's German School ist ihr Profil aufgrund ihrer bisherigen Tätigkeit insbesondere für den kardiologischen und akutmedizinischen Bereich interessant. Aufgrund ihrer noch vergleichsweise kurzen Berufserfahrung und der bislang fehlenden dokumentierten Berufserfahrung im deutschen Gesundheitswesen sollte für einen erfolgreichen Einstieg eine strukturierte Einarbeitung in die hiesigen pflegerischen Abläufe, Standards und Strukturen berücksichtigt werden."
+      ]
+    },
+    "experience": [
+      {
+        "id": "exp-1",
+        "period": "09/2024 – 03/2026",
+        "role": "Pflegefachfrau, Kardiologie",
+        "facility": "bei Sree Gokulam Medical College in Venjaramoodu",
+        "tasks": [
+          "Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten",
+          "Verabreichung ärztlich verordneter Herzmedikamente",
+          "Pflegerische Betreuung und Überwachung kardiologischer Patientinnen und Patienten",
+          "Vorbereitung und Assistenz bei diagnostischen und therapeutischen Maßnahmen",
+          "Dokumentation pflegerelevanter Daten im klinischen Informationssystem"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "period": "06/2020 – 09/2024",
+        "degree": "Bachelor of Science in Krankenpflege",
+        "institution": "an Sree Gokulam Medical College"
+      },
+      {
+        "id": "edu-2",
+        "period": "06/2018 – 03/2020",
+        "degree": "Oberschule",
+        "institution": "an S N Trust HSS"
+      },
+      {
+        "id": "edu-3",
+        "period": "06/2016 – 03/2017",
+        "degree": "Mittelschule",
+        "institution": "an Sree Narayana Public School"
+      }
+    ],
+    "skills": {
+      "languages": [
+        {
+          "language": "Deutsch",
+          "level": "B2"
+        },
+        {
+          "language": "Englisch",
+          "level": "B2"
+        },
+        {
+          "language": "Malayalam",
+          "level": "Muttersprache"
+        },
+        {
+          "language": "Tamil",
+          "level": "B1"
+        }
+      ],
+      "socialSkills": [
+        "Führungs- und Verantwortungsbewusstsein",
+        "Problemlösungskompetenz und aktives Zuhören",
+        "Ausgeprägte Beobachtungsgabe und Empathie",
+        "Teamfähigkeit und kooperative Zusammenarbeit"
+      ],
+      "itSkills": [
+        "Grundlegende Computerkenntnisse",
+        "Krankenhausinformationssysteme (KIS)",
+        "Digitale Pflegedokumentation"
+      ],
+      "equipment": [
+        "EKG-Gerät und Herzmonitor",
+        "Pulsoxymeter",
+        "Defibrillator und Notfallausrüstung (Crash Cart, Ambu-Beutel)",
+        "Absauggerät",
+        "Spritzen- und Infusionspumpe",
+        "BiPAP-Gerät"
+      ]
+    }
+  },
+  {
+    "id": "student-anju-mathew-2026",
+    "name": "Anju Mathew (OP-Pflege / Surgery)",
+    "updatedAt": "2026-11-13T07:12:41.693Z",
+    "template": "rosys-official",
+    "themeColor": "#18181b",
+    "fontFamily": "Inter, sans-serif",
+    "institution": {
+      "name": "Rosy's German School",
+      "subTitle": "German Linguist Since 1971 • Euronav Overseas & Educational Consultants",
+      "address": "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi, Kerala, India – 682024",
+      "phone": "+91 8921438879",
+      "email": "rosysgermanschool@gmail.com",
+      "website": "www.rosysgermanschool.com",
+      "logo": "/rosys-logo.png",
+      "partnerInfo": "Anerkanntes NORKA-SCA Partnerzentrum für Pflegefachkräfte in Deutschland"
+    },
+    "personalData": {
+      "lastName": "Mathew",
+      "firstName": "Anju",
+      "dateOfBirth": "22.11.1999",
+      "placeOfBirth": "Kerala, Indien",
+      "countryOfOrigin": "Indien",
+      "qualification": "Bachelor of Science in Nursing",
+      "yearsOfExperience": "2 Jahre 4 Monate",
+      "languageProficiency": "Deutsch B2 (Goethe)",
+      "startDate": "Februar 2027",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+    },
+    "assessment": {
+      "title": "Einschätzung Rosy's German School",
+      "paragraphs": [
+        "Frau Gopika Jayaram verfügt über rund eineinhalb Jahre Berufserfahrung als Pflegefachfrau im kardiologischen Bereich am Sree Gokulam Medical College.",
+        "In ihrer bisherigen Tätigkeit lag ihr Schwerpunkt auf der Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten, der pflegerischen Betreuung und Überwachung sowie der Verabreichung ärztlich verordneter Herzmedikamente. Darüber hinaus verfügt sie über praktische Erfahrung im Umgang mit für die kardiologische und akutmedizinische Versorgung relevanten Geräten, darunter EKG-Gerät, Herzmonitor, Pulsoxymeter, Defibrillator, Absauggerät sowie Spritzen- und Infusionspumpen. Auch im Umgang mit Notfallausrüstung wie Crash Cart und Ambu-Beutel sowie mit einem BiPAP-Gerät bringt sie praktische Erfahrung mit. Ihre fachliche Qualifikation wird durch einen Bachelor of Science in Nursing ergänzt.",
+        "Zu ihren persönlichen Kompetenzen zählen unter anderem Verantwortungsbewusstsein, Problemlösungskompetenz, aktives Zuhören, Beobachtungsgabe, Empathie und Teamfähigkeit. Sprachlich verfügt Frau Jayaram über Deutschkenntnisse auf B2-Niveau sowie Englischkenntnisse auf B2-Niveau.",
+        "Aus Sicht von Rosy's German School ist ihr Profil aufgrund ihrer bisherigen Tätigkeit insbesondere für den kardiologischen und akutmedizinischen Bereich interessant. Aufgrund ihrer noch vergleichsweise kurzen Berufserfahrung und der bislang fehlenden dokumentierten Berufserfahrung im deutschen Gesundheitswesen sollte für einen erfolgreichen Einstieg eine strukturierte Einarbeitung in die hiesigen pflegerischen Abläufe, Standards und Strukturen berücksichtigt werden."
+      ]
+    },
+    "experience": [
+      {
+        "id": "exp-1",
+        "period": "09/2024 – 03/2026",
+        "role": "Pflegefachfrau, Kardiologie",
+        "facility": "bei Sree Gokulam Medical College in Venjaramoodu",
+        "tasks": [
+          "Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten",
+          "Verabreichung ärztlich verordneter Herzmedikamente",
+          "Pflegerische Betreuung und Überwachung kardiologischer Patientinnen und Patienten",
+          "Vorbereitung und Assistenz bei diagnostischen und therapeutischen Maßnahmen",
+          "Dokumentation pflegerelevanter Daten im klinischen Informationssystem"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "period": "06/2020 – 09/2024",
+        "degree": "Bachelor of Science in Krankenpflege",
+        "institution": "an Sree Gokulam Medical College"
+      },
+      {
+        "id": "edu-2",
+        "period": "06/2018 – 03/2020",
+        "degree": "Oberschule",
+        "institution": "an S N Trust HSS"
+      },
+      {
+        "id": "edu-3",
+        "period": "06/2016 – 03/2017",
+        "degree": "Mittelschule",
+        "institution": "an Sree Narayana Public School"
+      }
+    ],
+    "skills": {
+      "languages": [
+        {
+          "language": "Deutsch",
+          "level": "B2"
+        },
+        {
+          "language": "Englisch",
+          "level": "B2"
+        },
+        {
+          "language": "Malayalam",
+          "level": "Muttersprache"
+        },
+        {
+          "language": "Tamil",
+          "level": "B1"
+        }
+      ],
+      "socialSkills": [
+        "Führungs- und Verantwortungsbewusstsein",
+        "Problemlösungskompetenz und aktives Zuhören",
+        "Ausgeprägte Beobachtungsgabe und Empathie",
+        "Teamfähigkeit und kooperative Zusammenarbeit"
+      ],
+      "itSkills": [
+        "Grundlegende Computerkenntnisse",
+        "Krankenhausinformationssysteme (KIS)",
+        "Digitale Pflegedokumentation"
+      ],
+      "equipment": [
+        "EKG-Gerät und Herzmonitor",
+        "Pulsoxymeter",
+        "Defibrillator und Notfallausrüstung (Crash Cart, Ambu-Beutel)",
+        "Absauggerät",
+        "Spritzen- und Infusionspumpe",
+        "BiPAP-Gerät"
+      ]
+    }
+  }
+]

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "docx": "^9.15.4",
+    "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "lucide-react": "^1.16.0",

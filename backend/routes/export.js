@@ -3,6 +3,8 @@ const router = express.Router();
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
+const { Packer } = require('docx');
+const { createDocxFromResume } = require('./docxGenerator');
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOGO_PATH = path.join(__dirname, '../public/rosys-logo.png');
@@ -27,7 +29,7 @@ function generateHtmlFromResume(data) {
   const education = data.education || [];
   const skills = data.skills || {};
   const logoSrc = getLogoBase64() || '/rosys-logo.png';
-  const themeColor = data.themeColor || '#14477c';
+  const themeColor = data.themeColor || '#18181b';
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -48,7 +50,7 @@ function generateHtmlFromResume(data) {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: #333333;
+      color: #1f2937;
       background: #ffffff;
       font-size: 13.5px;
       line-height: 1.45;
@@ -73,32 +75,46 @@ function generateHtmlFromResume(data) {
     .top-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      padding: 30px 48px 10px 48px;
+      align-items: center;
+      padding: 26px 48px 12px 48px;
+    }
+    .lebenslauf-badge-wrap {
+      display: inline-flex;
+      flex-direction: column;
     }
     .lebenslauf-badge {
       background-color: ${themeColor};
       color: #ffffff;
       padding: 12px 36px;
       font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
       display: inline-block;
+      text-transform: uppercase;
     }
+    .lebenslauf-flag-stripe {
+      display: flex;
+      height: 4px;
+      width: 100%;
+    }
+    .flag-black { background: #18181b; width: 33.33%; }
+    .flag-red { background: #dc2626; width: 33.33%; }
+    .flag-gold { background: #f59e0b; width: 33.34%; }
+
     .inst-logo-container {
       display: flex;
       align-items: center;
       gap: 12px;
     }
     .inst-logo-img {
-      height: 48px;
-      max-width: 200px;
+      height: 58px;
+      max-width: 220px;
       object-fit: contain;
     }
 
     /* Page Content */
     .page-content {
-      padding: 10px 48px 30px 48px;
+      padding: 6px 48px 24px 48px;
       flex-grow: 1;
     }
 
@@ -106,20 +122,31 @@ function generateHtmlFromResume(data) {
     .section-title-wrap {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 18px;
+      gap: 14px;
+      margin-top: 16px;
       margin-bottom: 12px;
     }
     .section-bar {
       height: 6px;
-      width: 140px;
+      width: 135px;
       background-color: ${themeColor};
+      position: relative;
+    }
+    .section-bar::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 25px;
+      height: 6px;
+      background-color: #dc2626;
     }
     .section-title {
-      font-size: 19px;
-      font-weight: 600;
-      color: #2b5788;
+      font-size: 18.5px;
+      font-weight: 700;
+      color: #18181b;
       margin: 0;
+      letter-spacing: -0.2px;
     }
 
     /* Personal Data Section Grid */
@@ -142,17 +169,17 @@ function generateHtmlFromResume(data) {
     .personal-data-table .label-col {
       width: 190px;
       font-weight: 700;
-      color: #333333;
+      color: #111827;
     }
     .personal-data-table .value-col {
-      color: #3b5998;
+      color: #1f2937;
     }
     .candidate-photo-wrap {
       margin-left: 24px;
       width: 125px;
       height: 155px;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -172,7 +199,7 @@ function generateHtmlFromResume(data) {
     .assessment-label {
       width: 190px;
       font-weight: 700;
-      color: #333333;
+      color: #111827;
       flex-shrink: 0;
       padding-top: 2px;
     }
@@ -180,7 +207,7 @@ function generateHtmlFromResume(data) {
       flex: 1;
       font-size: 13px;
       line-height: 1.48;
-      color: #2d3748;
+      color: #374151;
     }
     .assessment-text p {
       margin: 0 0 10px 0;
@@ -196,7 +223,7 @@ function generateHtmlFromResume(data) {
     .timeline-date {
       width: 190px;
       font-weight: 700;
-      color: #333333;
+      color: #111827;
       flex-shrink: 0;
     }
     .timeline-detail {
@@ -204,16 +231,16 @@ function generateHtmlFromResume(data) {
     }
     .timeline-role {
       font-weight: 700;
-      color: #1a4f8b;
+      color: #dc2626;
       margin-bottom: 2px;
     }
     .timeline-facility {
-      color: #3b5998;
+      color: #4b5563;
       margin-bottom: 4px;
     }
     .task-title {
       font-weight: 600;
-      color: #4a5568;
+      color: #4b5563;
       margin-top: 4px;
       margin-bottom: 2px;
     }
@@ -223,7 +250,7 @@ function generateHtmlFromResume(data) {
     }
     .task-list li {
       margin-bottom: 3px;
-      color: #2d3748;
+      color: #374151;
       line-height: 1.4;
     }
 
@@ -240,12 +267,12 @@ function generateHtmlFromResume(data) {
     .skills-label {
       width: 190px;
       font-weight: 700;
-      color: #333333;
+      color: #111827;
       flex-shrink: 0;
     }
     .skills-content {
       flex: 1;
-      color: #2d3748;
+      color: #374151;
     }
     .skills-content div {
       margin-bottom: 2px;
@@ -253,13 +280,13 @@ function generateHtmlFromResume(data) {
 
     /* Footer */
     .cv-footer {
-      border-top: 1px solid #e2e8f0;
-      padding: 12px 48px 18px 48px;
+      border-top: 1px solid #e5e7eb;
+      padding: 12px 48px 16px 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 11px;
-      color: #1a4f8b;
+      color: #4b5563;
       font-weight: 500;
     }
     .cv-footer-left {
@@ -270,6 +297,7 @@ function generateHtmlFromResume(data) {
     }
     .cv-footer-right {
       font-weight: 700;
+      color: #111827;
       white-space: nowrap;
     }
   </style>
@@ -280,7 +308,14 @@ function generateHtmlFromResume(data) {
   <div class="cv-page">
     <div>
       <div class="top-header">
-        <div class="lebenslauf-badge">Lebenslauf</div>
+        <div class="lebenslauf-badge-wrap">
+          <div class="lebenslauf-badge">Lebenslauf</div>
+          <div class="lebenslauf-flag-stripe">
+            <div class="flag-black"></div>
+            <div class="flag-red"></div>
+            <div class="flag-gold"></div>
+          </div>
+        </div>
         <div class="inst-logo-container">
           <img src="${logoSrc}" alt="${inst.name || 'Rosy\'s German School'}" class="inst-logo-img" />
         </div>
@@ -297,7 +332,7 @@ function generateHtmlFromResume(data) {
           <table class="personal-data-table">
             <tr>
               <td class="label-col">Nachname, Vorname</td>
-              <td class="value-col">${p.lastName || ''}, ${p.firstName || ''}</td>
+              <td class="value-col" style="font-weight: 600;">${p.lastName || ''}, ${p.firstName || ''}</td>
             </tr>
             <tr>
               <td class="label-col">Geburtstag/-ort</td>
@@ -317,16 +352,16 @@ function generateHtmlFromResume(data) {
             </tr>
             <tr>
               <td class="label-col">Sprachkenntnisse</td>
-              <td class="value-col">${p.languageProficiency || 'Deutsch B2'}</td>
+              <td class="value-col" style="font-weight: 700; color: #dc2626;">${p.languageProficiency || 'Deutsch B2'}</td>
             </tr>
             <tr>
               <td class="label-col">Arbeitsbeginn</td>
-              <td class="value-col">${p.startDate || 'Sofort verfügbar'}</td>
+              <td class="value-col">${p.startDate || 'März 2027'}</td>
             </tr>
           </table>
 
           <div class="candidate-photo-wrap">
-            ${p.photoUrl ? `<img src="${p.photoUrl}" alt="${p.firstName || ''} ${p.lastName || ''}" />` : '<div style="display:flex;height:100%;align-items:center;justify-content:center;color:#94a3b8;font-size:12px;">Foto</div>'}
+            ${p.photoUrl ? `<img src="${p.photoUrl}" alt="${p.firstName || ''} ${p.lastName || ''}" />` : '<div style="display:flex;height:100%;align-items:center;justify-content:center;color:#9ca3af;font-size:12px;">Foto</div>'}
           </div>
         </div>
 
@@ -375,7 +410,14 @@ function generateHtmlFromResume(data) {
   <div class="cv-page">
     <div>
       <div class="top-header">
-        <div class="lebenslauf-badge">Lebenslauf</div>
+        <div class="lebenslauf-badge-wrap">
+          <div class="lebenslauf-badge">Lebenslauf</div>
+          <div class="lebenslauf-flag-stripe">
+            <div class="flag-black"></div>
+            <div class="flag-red"></div>
+            <div class="flag-gold"></div>
+          </div>
+        </div>
         <div class="inst-logo-container">
           <img src="${logoSrc}" alt="${inst.name || 'Rosy\'s German School'}" class="inst-logo-img" />
         </div>
@@ -401,7 +443,7 @@ function generateHtmlFromResume(data) {
           <div class="timeline-item">
             <div class="timeline-date">${edu.period || ''}</div>
             <div class="timeline-detail">
-              <div class="timeline-role">${edu.degree || ''}</div>
+              <div class="timeline-role" style="color: #111827;">${edu.degree || ''}</div>
               <div class="timeline-facility">${edu.institution || ''}</div>
             </div>
           </div>
@@ -418,7 +460,7 @@ function generateHtmlFromResume(data) {
           <div class="skills-row">
             <div class="skills-label">Sprachkenntnisse</div>
             <div class="skills-content">
-              ${(skills.languages || []).map(l => `<div>${l.language} – ${l.level}</div>`).join('')}
+              ${(skills.languages || []).map(l => `<div><span style="font-weight:600;">${l.language}</span> – ${l.level}</div>`).join('')}
             </div>
           </div>
 
@@ -513,15 +555,27 @@ router.post('/export-pdf', async (req, res) => {
   }
 });
 
-// POST /api/export-html (preview or client use)
-router.post('/export-html', (req, res) => {
+// POST /api/export-docx
+router.post('/export-docx', async (req, res) => {
   try {
     const resumeData = req.body;
-    const htmlContent = generateHtmlFromResume(resumeData);
-    res.setHeader('Content-Type', 'text/html');
-    res.send(htmlContent);
-  } catch (err) {
-    res.status(500).send(err.message);
+    if (!resumeData) {
+      return res.status(400).json({ success: false, error: 'Resume data required' });
+    }
+
+    const doc = createDocxFromResume(resumeData);
+    const buffer = await Packer.toBuffer(doc);
+
+    const lastName = (resumeData.personalData?.lastName || 'Kandidat').replace(/[^a-zA-Z0-9_-]/g, '_');
+    const fileName = `Lebenslauf_Rosys_${lastName}.docx`;
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.send(buffer);
+  } catch (error) {
+    console.error('DOCX Generation Error:', error);
+    res.status(500).json({ success: false, error: error.message || 'Failed to generate Word document' });
   }
 });
 

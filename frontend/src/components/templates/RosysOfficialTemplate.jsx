@@ -7,56 +7,59 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
   const experience = data.experience || [];
   const education = data.education || [];
   const skills = data.skills || {};
-  const themeColor = data.themeColor || '#14477c';
+  const themeColor = data.themeColor || '#18181b';
   const logoSrc = inst.logo || '/rosys-logo.png';
 
   const footerText = `${inst.name || "Rosy's German School"}, ${inst.address || "1st Floor, Saroja Complex, Bank Junction, Edappally, Kochi"} | ${inst.phone || "+91 8921438879"} | ${inst.email || "rosysgermanschool@gmail.com"}`;
 
   const renderHeader = () => (
-    <div className="flex justify-between items-center px-12 pt-8 pb-4">
-      {/* Lebenslauf dark blue banner */}
-      <div 
-        className="text-white font-bold text-[19px] tracking-wide px-8 py-3 rounded-none shadow-sm flex items-center justify-center min-w-[210px]"
-        style={{ backgroundColor: themeColor }}
-      >
-        Lebenslauf
+    <div className="flex justify-between items-center px-12 pt-7 pb-3">
+      {/* Lebenslauf Banner with German Flag Tricolor Stripe */}
+      <div className="flex flex-col shadow-xs">
+        <div 
+          className="text-white font-black text-[20px] tracking-wider px-8 py-2.5 flex items-center justify-center min-w-[210px] uppercase"
+          style={{ backgroundColor: themeColor }}
+        >
+          Lebenslauf
+        </div>
+        <div className="flex h-[3.5px] w-full">
+          <div className="w-1/3 bg-[#18181b]"></div>
+          <div className="w-1/3 bg-[#dc2626]"></div>
+          <div className="w-1/3 bg-[#f59e0b]"></div>
+        </div>
       </div>
-      {/* Official Rosy's School Logo */}
+
+      {/* Official Rosy's German School Logo */}
       <div className="flex items-center gap-3">
         <img 
           src={logoSrc} 
           alt={inst.name || "Rosy's German School"} 
-          className="h-12 max-w-[210px] object-contain"
+          className="h-14 max-w-[220px] object-contain"
           onError={(e) => {
             e.target.style.display = 'none';
           }}
         />
-        <div className="text-right">
-          <div className="text-[14px] font-bold text-slate-800 tracking-tight leading-none uppercase">
-            {inst.name || "Rosy's German School"}
-          </div>
-          <div className="text-[9.5px] font-medium text-slate-500 mt-0.5">
-            {inst.subTitle || "Euronav Overseas & Educational Consultants"}
-          </div>
-        </div>
       </div>
     </div>
   );
 
   const renderFooter = (pageNumber, totalPages = 2) => (
-    <div className="border-t border-slate-200 px-12 py-3.5 flex justify-between items-center text-[11px] text-[#1a4f8b] font-medium mt-auto">
+    <div className="border-t border-slate-200 px-12 py-3 flex justify-between items-center text-[11px] text-slate-600 font-medium mt-auto">
       <div className="truncate max-w-[85%]">{footerText}</div>
-      <div className="font-bold text-slate-700 whitespace-nowrap">Seite {pageNumber}/{totalPages}</div>
+      <div className="font-bold text-slate-800 whitespace-nowrap">Seite {pageNumber}/{totalPages}</div>
     </div>
   );
 
   const renderSectionHeader = (title) => (
-    <div className="flex items-center gap-4 mt-4 mb-3">
-      <div 
-        className="h-[5px] w-[130px] flex-shrink-0" 
-        style={{ backgroundColor: themeColor }}
-      />
-      <h2 className="text-[19px] font-semibold text-[#255285] tracking-tight m-0">
+    <div className="flex items-center gap-3.5 mt-3.5 mb-2.5">
+      <div className="flex items-center">
+        <div 
+          className="h-[5px] w-[110px]" 
+          style={{ backgroundColor: themeColor }}
+        />
+        <div className="h-[5px] w-[25px] bg-[#dc2626]" />
+      </div>
+      <h2 className="text-[18px] font-bold text-slate-900 tracking-tight m-0 uppercase">
         {title}
       </h2>
     </div>
@@ -73,50 +76,50 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
           <div>
             {renderHeader()}
 
-            <div className="px-12 pt-2 pb-6">
+            <div className="px-12 pt-1 pb-6">
               {/* Section: Persönliche Daten */}
               {renderSectionHeader('Persönliche Daten')}
 
-              <div className="flex justify-between items-start mt-2 mb-4">
+              <div className="flex justify-between items-start mt-1.5 mb-3.5">
                 <table className="flex-1 text-[13px] border-collapse">
                   <tbody>
                     <tr>
                       <td className="w-[190px] py-1 font-bold text-slate-900">Nachname, Vorname</td>
-                      <td className="py-1 text-[#2d5282] font-medium">
+                      <td className="py-1 text-slate-900 font-semibold">
                         {p.lastName ? `${p.lastName}, ` : ''}{p.firstName || ''}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Geburtstag/-ort</td>
-                      <td className="py-1 text-[#2d5282]">
+                      <td className="py-1 text-slate-700">
                         {p.dateOfBirth || ''}{p.placeOfBirth ? `, ${p.placeOfBirth}` : ''}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Herkunftsland</td>
-                      <td className="py-1 text-[#2d5282]">{p.countryOfOrigin || 'Indien'}</td>
+                      <td className="py-1 text-slate-700">{p.countryOfOrigin || 'Indien'}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Ausbildung</td>
-                      <td className="py-1 text-[#2d5282]">{p.qualification || 'Bachelor of Science (Nursing)'}</td>
+                      <td className="py-1 text-slate-700">{p.qualification || 'Bachelor of Science (Nursing)'}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Berufserfahrung in Jahren</td>
-                      <td className="py-1 text-[#2d5282]">{p.yearsOfExperience || '1 Jahre 6 Monate'}</td>
+                      <td className="py-1 text-slate-700">{p.yearsOfExperience || '1 Jahre 6 Monate'}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Sprachkenntnisse</td>
-                      <td className="py-1 text-[#2d5282] font-semibold">{p.languageProficiency || 'Deutsch B2'}</td>
+                      <td className="py-1 font-bold text-rose-700">{p.languageProficiency || 'Deutsch B2'}</td>
                     </tr>
                     <tr>
                       <td className="py-1 font-bold text-slate-900">Arbeitsbeginn</td>
-                      <td className="py-1 text-[#2d5282]">{p.startDate || 'März 2027'}</td>
+                      <td className="py-1 text-slate-700">{p.startDate || 'März 2027'}</td>
                     </tr>
                   </tbody>
                 </table>
 
                 {/* Candidate Photo */}
-                <div className="ml-6 w-[120px] h-[150px] border border-slate-200 bg-slate-100 flex-shrink-0 overflow-hidden shadow-sm">
+                <div className="ml-6 w-[120px] h-[150px] border border-slate-300 bg-slate-50 flex-shrink-0 overflow-hidden shadow-xs">
                   {p.photoUrl ? (
                     <img 
                       src={p.photoUrl} 
@@ -126,14 +129,14 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 text-xs text-center p-2">
                       <span>Bewerberfoto</span>
-                      <span className="text-[10px] text-slate-300">(Passbild)</span>
+                      <span className="text-[10px] text-slate-400">(Passbild)</span>
                     </div>
                   )}
                 </div>
               </div>
 
               {/* Section: Einschätzung Rosy's German School */}
-              <div className="flex items-start mt-3 mb-4 text-[12.8px] leading-[1.48]">
+              <div className="flex items-start mt-2 mb-3.5 text-[12.8px] leading-[1.48]">
                 <div className="w-[190px] font-bold text-slate-900 flex-shrink-0 pt-0.5">
                   {assessment.title || "Einschätzung Rosy's German School"}
                 </div>
@@ -153,15 +156,15 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     {exp.period}
                   </div>
                   <div className="flex-1">
-                    <div className="font-bold text-[#1a4f8b] text-[13.5px]">
+                    <div className="font-bold text-rose-700 text-[13.5px]">
                       {exp.role}
                     </div>
-                    <div className="text-[#2b5788] mb-1">
+                    <div className="text-slate-600 mb-1">
                       {exp.facility}
                     </div>
                     {exp.tasks && exp.tasks.length > 0 && (
                       <div>
-                        <div className="font-semibold text-slate-700 text-[12.5px] mt-1 mb-0.5">
+                        <div className="font-semibold text-slate-800 text-[12.5px] mt-1 mb-0.5">
                           Aufgaben:
                         </div>
                         <ul className="list-disc pl-5 m-0 space-y-0.5 text-slate-700 text-[12.5px]">
@@ -190,10 +193,10 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
           <div>
             {renderHeader()}
 
-            <div className="px-12 pt-2 pb-6">
+            <div className="px-12 pt-1 pb-6">
               {/* Fortsetzung der Aufgaben von Seite 1 */}
               {experience.length > 0 && experience[0].tasks && experience[0].tasks.length > 2 && (
-                <div className="flex items-start text-[12.5px] mb-4">
+                <div className="flex items-start text-[12.5px] mb-3">
                   <div className="w-[190px] flex-shrink-0"></div>
                   <div className="flex-1">
                     <ul className="list-disc pl-5 m-0 space-y-1 text-slate-700">
@@ -212,8 +215,8 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                     {exp.period}
                   </div>
                   <div className="flex-1">
-                    <div className="font-bold text-[#1a4f8b]">{exp.role}</div>
-                    <div className="text-[#2b5788] mb-0.5">{exp.facility}</div>
+                    <div className="font-bold text-rose-700">{exp.role}</div>
+                    <div className="text-slate-600 mb-0.5">{exp.facility}</div>
                     {exp.tasks && exp.tasks.length > 0 && (
                       <ul className="list-disc pl-5 m-0 space-y-0.5 text-slate-700 text-[12.5px]">
                         {exp.tasks.map((task, tIdx) => (
@@ -228,15 +231,15 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
               {/* Section: Ausbildung */}
               {renderSectionHeader('Ausbildung')}
 
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2.5 mb-5">
                 {education.map((edu, idx) => (
                   <div key={idx} className="flex items-start text-[13px]">
                     <div className="w-[190px] font-bold text-slate-900 flex-shrink-0">
                       {edu.period}
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-[#1a4f8b]">{edu.degree}</div>
-                      <div className="text-[#2b5788]">{edu.institution}</div>
+                      <div className="font-bold text-slate-900">{edu.degree}</div>
+                      <div className="text-slate-600">{edu.institution}</div>
                     </div>
                   </div>
                 ))}
@@ -254,7 +257,7 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                   <div className="flex-1 space-y-0.5 text-slate-800">
                     {(skills.languages || []).map((lang, idx) => (
                       <div key={idx}>
-                        <span className="font-medium">{lang.language}</span> – {lang.level}
+                        <span className="font-semibold">{lang.language}</span> – {lang.level}
                       </div>
                     ))}
                   </div>
@@ -291,7 +294,10 @@ export default function RosysOfficialTemplate({ data, page = 'all' }) {
                   </div>
                   <div className="flex-1 space-y-0.5 text-slate-800">
                     {(skills.equipment || []).map((eq, idx) => (
-                      <div key={idx}>{eq}</div>
+                      <div key={idx} className="flex items-center gap-1.5">
+                        <span className="text-rose-600 font-bold text-xs">✓</span>
+                        <span>{eq}</span>
+                      </div>
                     ))}
                   </div>
                 </div>

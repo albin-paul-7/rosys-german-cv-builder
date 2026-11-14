@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import TemplateGallery from './components/TemplateGallery';
 import ResumeEditor from './components/ResumeEditor';
 import LivePreview from './components/LivePreview';
+import HostDashboard from './components/HostDashboard';
 
 import { initialRosysCvData, alternativeProfiles } from './data/sampleCvData';
 import { fetchDefaultSample, saveResume } from './utils/api';
@@ -10,7 +11,7 @@ import { Eye, Edit3, CheckCircle } from 'lucide-react';
 
 export default function App() {
   const [resumeData, setResumeData] = useState(initialRosysCvData);
-  const [currentView, setCurrentView] = useState('editor'); // 'editor' | 'templates'
+  const [currentView, setCurrentView] = useState('editor'); // 'editor' | 'templates' | 'host'
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState(null);
   const [mobileTab, setMobileTab] = useState('form'); // 'form' | 'preview'
@@ -40,7 +41,7 @@ export default function App() {
     try {
       const res = await saveResume(resumeData);
       if (res && res.success) {
-        showNotification('Lebenslauf saved successfully to Rosy\'s Cloud DB!');
+        showNotification('CV saved & submitted! Available in Host Portal for download.');
       } else {
         showNotification('Saved locally to browser session', 'info');
       }
@@ -64,7 +65,7 @@ export default function App() {
   const handleReset = () => {
     setResumeData({
       ...initialRosysCvData,
-      id: `rosys-cv-${Date.now()}`,
+      id: `student-cv-${Date.now()}`,
       personalData: {
         lastName: '',
         firstName: '',
@@ -104,6 +105,12 @@ export default function App() {
     }));
   };
 
+  const handleSelectResumeFromHost = (fullResume) => {
+    setResumeData(fullResume);
+    setCurrentView('editor');
+    showNotification(`Opened ${fullResume.personalData?.lastName || 'Student'}'s CV in Editor`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-100 text-slate-800">
       {/* Navbar */}
@@ -114,6 +121,7 @@ export default function App() {
         onSave={handleSave}
         isSaving={isSaving}
         onReset={handleReset}
+        resumeData={resumeData}
       />
 
       {/* Floating Notification */}
@@ -125,7 +133,14 @@ export default function App() {
       )}
 
       {/* Main Body */}
-      {currentView === 'templates' ? (
+      {currentView === 'host' ? (
+        <div className="flex-1 overflow-y-auto">
+          <HostDashboard
+            onSelectResumeForEdit={handleSelectResumeFromHost}
+            onBackToEditor={() => setCurrentView('editor')}
+          />
+        </div>
+      ) : currentView === 'templates' ? (
         <div className="flex-1 overflow-y-auto">
           <TemplateGallery
             selectedTemplate={resumeData.template}
@@ -159,7 +174,7 @@ export default function App() {
             </button>
           </div>
 
-          {/* Left: Resume Editor Form (Desktop: 42% - 48% width, Mobile: conditioned) */}
+          {/* Left: Resume Editor Form (Desktop: 44% width) */}
           <div
             className={`w-full lg:w-[48%] xl:w-[44%] h-[calc(100vh-4rem)] flex flex-col ${
               mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'
@@ -171,7 +186,7 @@ export default function App() {
             />
           </div>
 
-          {/* Right: Live Real-Time A4 Preview (Desktop: Remaining width, Mobile: conditioned) */}
+          {/* Right: Live Real-Time A4 Preview (Desktop: Remaining width) */}
           <div
             className={`w-full lg:flex-1 h-[calc(100vh-4rem)] flex flex-col ${
               mobileTab === 'form' ? 'hidden lg:flex' : 'flex'
