@@ -5,16 +5,29 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 const { Packer } = require('docx');
 const { createDocxFromResume } = require('./docxGenerator');
+const { verifyHost, handleHostLogin } = require('../middleware/auth');
 
 const DATA_FILE = path.join(__dirname, '../data/resumes-storage.json');
 const DEFAULT_SAMPLE_FILE = path.join(__dirname, '../data/rosys-default.json');
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const LOGO_PATH = path.join(__dirname, '../public/rosys-logo.png');
+
+function getLogoBase64() {
+  try {
+    if (fs.existsSync(LOGO_PATH)) {
+      const buffer = fs.readFileSync(LOGO_PATH);
+      return `data:image/png;base64,${buffer.toString('base64')}`;
+    }
+  } catch (e) {
+    console.error('Error reading logo:', e);
+  }
+  return '';
+}
 
 function getStorage() {
   try {
     if (!fs.existsSync(DATA_FILE)) {
       const defaultSample = JSON.parse(fs.readFileSync(DEFAULT_SAMPLE_FILE, 'utf-8'));
-      // Pre-seed with sample candidates for host demonstration
       const initialList = [
         defaultSample,
         {
@@ -71,8 +84,11 @@ function saveStorage(resumes) {
   }
 }
 
-// GET all resumes (for Host Dashboard & student list)
-router.get('/', (req, res) => {
+// POST Host Login verification
+router.post('/host/login', handleHostLogin);
+
+// GET all resumes (Protected: Only Host can list other students' CVs)
+router.get('/', verifyHost, (req, res) => {
   const list = getStorage();
   const summaryList = list.map(r => ({
     id: r.id,
@@ -90,7 +106,7 @@ router.get('/', (req, res) => {
   res.json({ success: true, count: summaryList.length, resumes: summaryList });
 });
 
-// GET default sample
+// GET default sample (Public: needed for template preview)
 router.get('/default/sample', (req, res) => {
   try {
     const defaultData = JSON.parse(fs.readFileSync(DEFAULT_SAMPLE_FILE, 'utf-8'));
@@ -100,23 +116,18 @@ router.get('/default/sample', (req, res) => {
   }
 });
 
-// GET single resume by ID
-router.get('/:id', (req, res) => {
+// GET single resume by ID (Protected: Only Host or owner)
+router.get('/:id', verifyHost, (req, res) => {
   const { id } = req.params;
   const list = getStorage();
   const found = list.find(r => r.id === id);
   if (found) {
     return res.json({ success: true, resume: found });
   }
-  try {
-    const defaultData = JSON.parse(fs.readFileSync(DEFAULT_SAMPLE_FILE, 'utf-8'));
-    res.json({ success: true, resume: defaultData, isFallback: true });
-  } catch (err) {
-    res.status(404).json({ success: false, error: 'Resume not found' });
-  }
+  res.status(404).json({ success: false, error: 'Resume not found' });
 });
 
-// POST save or update resume (called when student creates/saves CV)
+// POST save or update resume (Public for student submitting their own CV)
 router.post('/', (req, res) => {
   const resume = req.body;
   if (!resume || !resume.personalData) {
@@ -143,11 +154,11 @@ router.post('/', (req, res) => {
   }
 
   saveStorage(list);
-  res.json({ success: true, message: 'Student CV saved successfully', resume: preparedResume });
+  res.json({ success: true, message: 'Student CV saved successfully to Rosy\'s portal', resume: preparedResume });
 });
 
-// DELETE resume (host action)
-router.delete('/:id', (req, res) => {
+// DELETE resume (Protected: Host only)
+router.delete('/:id', verifyHost, (req, res) => {
   const { id } = req.params;
   const list = getStorage();
   const filtered = list.filter(r => r.id !== id);
@@ -155,8 +166,8 @@ router.delete('/:id', (req, res) => {
   res.json({ success: true, message: 'Student CV removed' });
 });
 
-// GET direct download DOCX by student ID
-router.get('/:id/export-docx', async (req, res) => {
+// GET download DOCX by student ID (Protected: Host only)
+router.get('/:id/export-docx', verifyHost, async (req, res) => {
   try {
     const { id } = req.params;
     const list = getStorage();

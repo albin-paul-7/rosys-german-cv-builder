@@ -1,28 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Users, 
-  Download, 
   FileText, 
   FileSpreadsheet, 
   Search, 
   Trash2, 
   Edit3, 
   CheckCircle2, 
-  Calendar, 
-  GraduationCap, 
-  Clock, 
   RefreshCw,
   ArrowLeft,
   ShieldCheck,
-  FileDown
+  FileDown,
+  Lock,
+  KeyRound,
+  LogOut,
+  AlertCircle
 } from 'lucide-react';
-import { fetchSavedResumes, fetchResumeById } from '../utils/api';
+import { 
+  fetchSavedResumes, 
+  fetchResumeById, 
+  loginAsHost, 
+  isHostAuthenticated, 
+  clearHostToken 
+} from '../utils/api';
 import { downloadCvPdf } from '../utils/pdfExport';
 import { downloadCvDocx } from '../utils/docxExport';
 
 export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(isHostAuthenticated());
+  const [pinInput, setPinInput] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [isSubmittingPin, setIsSubmittingPin] = useState(false);
+
   const [resumes, setResumes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [levelFilter, setLevelFilter] = useState('all');
   const [actionMessage, setActionMessage] = useState('');
@@ -30,8 +41,12 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
   const loadData = async () => {
     setLoading(true);
     try {
-      const data = await fetchSavedResumes();
-      setResumes(data || []);
+      const result = await fetchSavedResumes();
+      if (result.unauthorized) {
+        setIsAuthenticated(false);
+      } else {
+        setResumes(result.resumes || []);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -40,8 +55,35 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isAuthenticated) {
+      loadData();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoginError('');
+    setIsSubmittingPin(true);
+    try {
+      const res = await loginAsHost(pinInput);
+      if (res.success) {
+        setIsAuthenticated(true);
+        setPinInput('');
+      } else {
+        setLoginError(res.error || 'Access denied: Incorrect Host PIN');
+      }
+    } catch (err) {
+      setLoginError('Authentication failed. Please verify credentials.');
+    } finally {
+      setIsSubmittingPin(false);
+    }
+  };
+
+  const handleLogout = () => {
+    clearHostToken();
+    setIsAuthenticated(false);
+    setResumes([]);
+  };
 
   const handleDownloadPdf = async (resumeItem) => {
     setActionMessage(`Preparing PDF for ${resumeItem.name}...`);
@@ -78,7 +120,11 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
   const handleDelete = async (id, name) => {
     if (window.confirm(`Are you sure you want to delete ${name}'s CV?`)) {
       try {
-        await fetch(`/api/resumes/${id}`, { method: 'DELETE' });
+        const token = sessionStorage.getItem('rosys_host_token') || '';
+        await fetch(`/api/resumes/${id}`, { 
+          method: 'DELETE',
+          headers: { 'x-host-token': token }
+        });
         setResumes(prev => prev.filter(r => r.id !== id));
         setActionMessage(`${name}'s CV deleted`);
         setTimeout(() => setActionMessage(''), 2500);
@@ -95,6 +141,76 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
     }
   };
 
+  // If NOT authenticated, show Host Security Verification Gate
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl border border-slate-200 p-8 text-center">
+          <div className="w-14 h-14 bg-amber-50 border border-amber-200 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xs">
+            <Lock className="w-7 h-7" />
+          </div>
+
+          <h2 className="text-xl font-black text-slate-900 tracking-tight mb-1">
+            Host Access Verification
+          </h2>
+          <p className="text-xs text-slate-500 leading-relaxed mb-6">
+            Only the administrator / host of Rosy's German School can view and download other students' CV dossiers. Students are strictly restricted to their own CV.
+          </p>
+
+          <form onSubmit={handleLogin} className="space-y-4 text-left">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Enter Host Passcode / PIN
+              </label>
+              <div className="relative">
+                <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="password"
+                  value={pinInput}
+                  onChange={(e) => setPinInput(e.target.value)}
+                  placeholder="Enter Host PIN..."
+                  autoFocus
+                  required
+                  className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                />
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1.5">
+                Default Host PIN: <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-bold">rosys1971</code>
+              </p>
+            </div>
+
+            {loginError && (
+              <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-rose-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmittingPin}
+              className="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center gap-2"
+            >
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <span>{isSubmittingPin ? 'Verifying...' : 'Unlock Host Portal'}</span>
+            </button>
+          </form>
+
+          <div className="mt-6 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={onBackToEditor}
+              className="text-xs text-slate-500 hover:text-slate-800 font-semibold inline-flex items-center gap-1.5"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Return to Student CV Studio
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Filtered resumes
   const filtered = resumes.filter(r => {
     const matchesSearch = 
@@ -108,7 +224,7 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Top Bar with Back Navigation */}
+      {/* Top Bar with Back Navigation & Host Logout */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div>
           <button
@@ -123,12 +239,13 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">
               Host Admin Dashboard
             </h1>
-            <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-              Host Access
+            <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-amber-700" />
+              Host Authenticated
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Manage, review, and download student healthcare CVs in both PDF and Word (.docx) formats.
+            Confidential: Manage, review, and download student healthcare CVs in both PDF and Word (.docx) formats.
           </p>
         </div>
 
@@ -141,6 +258,16 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh List
+          </button>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-1.5 bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 text-xs font-bold px-3 py-2 rounded-lg transition"
+            title="Lock Host Portal"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            Lock Portal
           </button>
         </div>
       </div>
@@ -177,7 +304,7 @@ export default function HostDashboard({ onSelectResumeForEdit, onBackToEditor })
 
         <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Export Formats</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Host Download Formats</p>
             <p className="text-sm font-bold text-slate-800 mt-1">PDF & Microsoft Word (.docx)</p>
           </div>
           <div className="w-11 h-11 bg-amber-50 text-amber-700 rounded-lg flex items-center justify-center font-bold">
