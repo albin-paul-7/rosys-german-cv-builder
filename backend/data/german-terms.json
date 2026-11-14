@@ -1,0 +1,92 @@
+{
+  "departments": [
+    {
+      "name": "Kardiologie",
+      "english": "Cardiology",
+      "title": "Pflegefachfrau / Pflegefachkraft, Kardiologie",
+      "sampleFacility": "bei Sree Gokulam Medical College in Venjaramoodu",
+      "tasks": [
+        "Einschätzung und Beurteilung kardiologischer Patientinnen und Patienten",
+        "Verabreichung ärztlich verordneter Herzmedikamente und Infusionen",
+        "Pflegerische Betreuung und Überwachung telemetrischer Überwachungssysteme",
+        "Vorbereitung und Nachbereitung von Herzkatheteruntersuchungen",
+        "Umgang mit Notfallausrüstung und Notfallmanagement bei Herzrhythmusstörungen",
+        "Dokumentation im digitalen Krankenhausinformationssystem"
+      ],
+      "assessmentSummary": "verfügt über fundierte klinische Erfahrung in der kardiologischen Pflege. Zu ihren Kernkompetenzen gehören die präzise Vitalzeichenüberwachung, die Verabreichung kardialer Notfallmedikamente und die Bedienung moderner Überwachungsmonitore. Sie zeigt ein hohes Maß an Verantwortungsbewusstsein und arbeitet hochprofessionell im interdisziplinären Team."
+    },
+    {
+      "name": "Intensivstation (ITS / ICU)",
+      "english": "Intensive Care Unit",
+      "title": "Pflegefachkraft für Intensiv- und Anästhesiepflege",
+      "sampleFacility": "am Aster Medcity Hospital in Kochi",
+      "tasks": [
+        "Kontinuierliche Überwachung und Pflege beatmeter und kreislaufinstabiler Patienten",
+        "Bedienung und Monitoring von Beatmungsgeräten (BiPAP/CPAP, invasive Beatmung)",
+        "Sichere Verabreichung von Katecholaminen und ZVD-Messung",
+        "Durchführung endotrachealer Absaugung und Tracheostomapflege",
+        "Schnelles und strukturiertes Handeln bei Reanimationen und Notfällen",
+        "Interprofessionelle Visitenbegleitung und akkurate Pflegedokumentation"
+      ],
+      "assessmentSummary": "bringt umfassende intensivpflegerische Expertise mit. Sie beherrscht invasive und nicht-invasive Beatmungsformen, hämodynamisches Monitoring sowie die Verabreichung hochwirksamer Notfallmedikamente. Ihr rasches Urteilsvermögen in Akutsituationen und ihre Belastbarkeit machen sie zu einer wertvollen Bereicherung."
+    },
+    {
+      "name": "OP-Pflege / Chirurgie",
+      "english": "Operating Room / Surgery",
+      "title": "Operationstechnische Assistentin / OP-Pflegekraft",
+      "sampleFacility": "am Lakeshore Hospital in Kochi",
+      "tasks": [
+        "Instrumentier- und Springertätigkeiten bei viszeral- und unfallchirurgischen Eingriffen",
+        "Gewährleistung lückenloser Asepsis und Vorbereitung steriler Instrumententische",
+        "Prä- und postoperative Patientenversorgung im Einleitungs- und Aufwachraum",
+        "Bedienung elektrochirurgischer Geräte und Saugsysteme",
+        "Zählkontrolle und OP-Dokumentation gemäß Krankenhausrichtlinien"
+      ],
+      "assessmentSummary": "zeichnet sich durch exzellentes Fachwissen im Operationsbereich und absolute Sorgfalt bei Sterilitätsstandards aus. Sie agiert ruhig und vorausschauend am OP-Tisch und arbeitet vertrauensvoll mit den chirurgischen und anästhesiologischen Teams zusammen."
+    },
+    {
+      "name": "Innere Medizin",
+      "english": "Internal Medicine",
+      "title": "Gesundheits- und Krankenpflegerin, Innere Medizin",
+      "sampleFacility": "am Amrita Institute of Medical Sciences in Kochi",
+      "tasks": [
+        "Ganzheitliche pflegerische Betreuung multimorbider internistischer Patienten",
+        "Blutzuckermanagement, Insulintherapie und Wundversorgung",
+        "Verabreichung oraler und parenteraler Medikation nach ärztlicher Anordnung",
+        "Mobilisation und aktivierende Pflege nach Pflegestandards",
+        "Psychosoziale Unterstützung von Patienten und deren Angehörigen"
+      ],
+      "assessmentSummary": "überzeugt durch ein ganzheitliches Pflegeverständnis und breites internistisches Fachwissen. Sie pflegt einen empathischen und respektvollen Umgang mit Patienten und Angehörigen und meistert komplexe pflegerische Herausforderungen mit hoher Kompetenz."
+    }
+  ],
+  "equipmentList": [
+    "EKG-Gerät und Herzmonitor",
+    "Pulsoxymeter",
+    "Defibrillator und Notfallausrüstung (Crash Cart, Ambu-Beutel)",
+    "Absauggerät",
+    "Spritzen- und Infusionspumpe (Perfusor / Infusomat)",
+    "BiPAP- und CPAP-Gerät",
+    "Blutzuckermessgerät",
+    "Zentralvenöse Katheter (ZVK) Pflegebesteck",
+    "Magensonden und enterale Ernährungspumpen",
+    "Blasenkatheter-Systeme",
+    "Patientenüberwachungsmonitore (Philips / GE)",
+    "Pneumatische Thromboseprophylaxe-Systeme"
+  ],
+  "socialCompetencies": [
+    "Führungs- und Verantwortungsbewusstsein",
+    "Problemlösungskompetenz und aktives Zuhören",
+    "Ausgeprägte Beobachtungsgabe und Empathie",
+    "Teamfähigkeit und kooperative Zusammenarbeit",
+    "Kulturelle Sensibilität und Anpassungsfähigkeit",
+    "Hohe Belastbarkeit in Stress- und Notfallsituationen",
+    "Strukturierte und eigenverantwortliche Arbeitsweise"
+  ],
+  "languagesList": [
+    { "language": "Deutsch", "level": "B2" },
+    { "language": "Englisch", "level": "B2" },
+    { "language": "Malayalam", "level": "Muttersprache" },
+    { "language": "Tamil", "level": "B1" },
+    { "language": "Hindi", "level": "B1" }
+  ]
+}
