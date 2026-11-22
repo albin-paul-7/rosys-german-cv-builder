@@ -16,7 +16,6 @@ import ExperienceForm from './FormSections/ExperienceForm';
 import EducationForm from './FormSections/EducationForm';
 import SkillsForm from './FormSections/SkillsForm';
 import InstituteBrandingForm from './FormSections/InstituteBrandingForm';
-import { THEME_COLORS } from '../data/templatesConfig';
 
 export default function ResumeEditor({ resumeData, onChange }) {
   const [activeTab, setActiveTab] = useState('personal');
@@ -34,13 +33,6 @@ export default function ResumeEditor({ resumeData, onChange }) {
     onChange({
       ...resumeData,
       [section]: data
-    });
-  };
-
-  const handleColorChange = (color) => {
-    onChange({
-      ...resumeData,
-      themeColor: color
     });
   };
 
@@ -72,25 +64,19 @@ export default function ResumeEditor({ resumeData, onChange }) {
         </div>
       </div>
 
-      {/* Theme color customizer bar */}
+      {/* Format info bar */}
       <div className="px-5 py-2.5 bg-slate-100/60 border-b border-slate-200 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2 text-slate-600 font-medium">
           <Palette className="w-3.5 h-3.5 text-slate-500" />
-          <span>Accent Theme:</span>
+          <span>Active Format:</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          {THEME_COLORS.map((col) => (
-            <button
-              key={col.value}
-              type="button"
-              title={col.name}
-              onClick={() => handleColorChange(col.value)}
-              className={`w-5 h-5 rounded-full border-2 transition transform hover:scale-110 ${
-                resumeData.themeColor === col.value ? 'border-slate-800 ring-2 ring-blue-300' : 'border-white'
-              }`}
-              style={{ backgroundColor: col.value }}
-            />
-          ))}
+        <div className="flex items-center gap-2 font-semibold text-slate-800 text-[11px]">
+          <div className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#18181b]"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#dc2626]"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"></span>
+          </div>
+          <span>Official Black & Orange Standard</span>
         </div>
       </div>
 

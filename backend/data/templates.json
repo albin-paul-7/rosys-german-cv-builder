@@ -2,62 +2,18 @@
   {
     "id": "rosys-official",
     "name": "Rosy's Official Standard",
-    "description": "Exact match to the institutional recruitment template with Rosy's branding, dark navy Lebenslauf header, structured 2-page flow, and verified footer.",
-    "badge": "Recommended & Official",
-    "accentColor": "#14477c",
+    "description": "Authentic German recruitment standard branded with the Rosy's German School emblem (German Linguist Since 1971), signature black & orange Lebenslauf banner with German flag tricolor accent, structured 2-page flow, and verified Edappally footer.",
+    "badge": "Official & Mandatory Format",
+    "accentColor": "#18181b",
     "popular": true,
     "thumbnail": "/thumbnails/rosys-official.png",
     "features": [
       "Exact Care-Gates style institutional layout",
+      "Signature black & orange tricolor Lebenslauf header",
       "Two-column personal details with applicant photo",
       "Official 'Einschätzung Rosy's German School' assessment",
       "Multi-page footer with Rosy's Edappally contact & Seite numbering",
       "German clinical terminology standard"
-    ]
-  },
-  {
-    "id": "rosys-modern",
-    "name": "Rosy's Modern Sapphire",
-    "description": "Contemporary German healthcare layout with subtle badges, refined typography, and highlighted clinical equipment section.",
-    "badge": "Modern",
-    "accentColor": "#0284c7",
-    "popular": false,
-    "thumbnail": "/thumbnails/rosys-modern.png",
-    "features": [
-      "Modern header with European CEFR B2 badge",
-      "Equipment grid with clinical icons",
-      "Clear chronological career timeline",
-      "Rosy's official partner accreditation watermark"
-    ]
-  },
-  {
-    "id": "rosys-executive",
-    "name": "Rosy's Clinical Executive",
-    "description": "High-impact layout emphasizing clinical specialization, German B2 certifications, and intensive hospital assessment.",
-    "badge": "Specialist",
-    "accentColor": "#831843",
-    "popular": false,
-    "thumbnail": "/thumbnails/rosys-executive.png",
-    "features": [
-      "Deep wine / crimson institution header",
-      "Enhanced clinical duties breakdown",
-      "Prominent language certification block",
-      "Detailed medical apparatus handling matrix"
-    ]
-  },
-  {
-    "id": "rosys-minimal",
-    "name": "Rosy's Minimal Compact",
-    "description": "Clean, understated monochrome & navy design favored by German university hospital hiring directors.",
-    "badge": "Classic",
-    "accentColor": "#334155",
-    "popular": false,
-    "thumbnail": "/thumbnails/rosys-minimal.png",
-    "features": [
-      "Minimalist print-optimized typography",
-      "Crisp divider rules and compact spacing",
-      "High ATS readability for German hospital portals",
-      "Full institutional Rosy's verification header"
     ]
   }
 ]

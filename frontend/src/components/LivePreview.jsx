@@ -12,10 +12,6 @@ import {
 } from 'lucide-react';
 
 import RosysOfficialTemplate from './templates/RosysOfficialTemplate';
-import RosysModernTemplate from './templates/RosysModernTemplate';
-import RosysExecutiveTemplate from './templates/RosysExecutiveTemplate';
-import RosysMinimalTemplate from './templates/RosysMinimalTemplate';
-import { TEMPLATES } from '../data/templatesConfig';
 import { downloadCvPdf, triggerPrint } from '../utils/pdfExport';
 import { downloadCvDocx } from '../utils/docxExport';
 
@@ -66,38 +62,18 @@ export default function LivePreview({ resumeData, onUpdateTemplate }) {
   };
 
   const renderSelectedTemplate = (pageParam) => {
-    switch (currentTemplateId) {
-      case 'rosys-modern':
-        return <RosysModernTemplate data={resumeData} page={pageParam} />;
-      case 'rosys-executive':
-        return <RosysExecutiveTemplate data={resumeData} page={pageParam} />;
-      case 'rosys-minimal':
-        return <RosysMinimalTemplate data={resumeData} page={pageParam} />;
-      case 'rosys-official':
-      default:
-        return <RosysOfficialTemplate data={resumeData} page={pageParam} />;
-    }
+    return <RosysOfficialTemplate data={resumeData} page={pageParam} />;
   };
 
   return (
     <div className="flex-1 flex flex-col h-full bg-slate-200/80 overflow-hidden">
       {/* Top Controls Toolbar */}
       <div className="bg-white border-b border-slate-300 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
-        {/* Left: Template Switcher & Page Tabs */}
+        {/* Left: Official Template Indicator & Page Tabs */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <Layers className="w-4 h-4 text-slate-500" />
-            <select
-              value={currentTemplateId}
-              onChange={(e) => onUpdateTemplate(e.target.value)}
-              className="text-xs font-semibold bg-slate-50 border border-slate-300 rounded-md px-2.5 py-1.5 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {TEMPLATES.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
+          <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 rounded-md border border-slate-300 text-xs font-bold text-slate-800">
+            <span className="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+            <span>Rosy's Official Standard (Black & Orange)</span>
           </div>
 
           <div className="h-4 w-px bg-slate-300 hidden sm:block"></div>

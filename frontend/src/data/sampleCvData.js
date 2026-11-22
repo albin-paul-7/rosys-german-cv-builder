@@ -148,8 +148,8 @@ export const alternativeProfiles = {
     id: "sample-rahul-nair",
     name: "Rahul Nair - Intensivstation (ITS)",
     updatedAt: new Date().toISOString(),
-    template: "rosys-modern",
-    themeColor: "#dc2626",
+    template: "rosys-official",
+    themeColor: "#18181b",
     fontFamily: "Inter, sans-serif",
     institution: { ...initialRosysCvData.institution },
     personalData: {
